@@ -11,12 +11,15 @@ fetch(apiUrl)
         for (var i = 0; i < da.data[0].timeSeries.length; i++) {
             var objTemp = da.data[0].timeSeries[i];
             var numTemp = objTemp.close;
+            var timeTemp = objTemp.time;
             priceArray.push(numTemp);
+            var formatedDate = moment.unix(timeTemp).format("MMMM Do");
+            console.log(formatedDate);
+            labelsArray.push(formatedDate);
         }
-        console.log(da.data[0]);
+        console.log(labelsArray);
         createChart();
     });
-
 
 //Create and edit chart object
 function createChart() {
@@ -27,7 +30,7 @@ function createChart() {
 
         // The data for our dataset
         data: {
-            labels: priceArray,
+            labels: labelsArray,
             datasets: [{
                 label: 'Price per Day',
                 backgroundColor: 'rgb(255, 99, 132)',
