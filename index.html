@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Compressed CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <title>The Reddit Effect</title>
 
@@ -17,12 +18,27 @@
     <main>
         <!--Nav bar including time intervals and search bar-->
         <nav class="mainNav">
-            <div class="periodSelector"></div>
             <input type="text" placeholder="Search">
         </nav>
         <!--Container for Graph-->
-        <div class="container-graph">
-            <canvas id="myChart" width="100" height="50"></canvas>
+        <div class="grid-x">
+            <div class="grid-x align-center container-graph grid-padding-x">
+                <div class="cell align-center grid-padding-x">
+                    <div class="cell large-4">
+                        <input type="text" placeholder="Start Date" id="startDateInput">
+                    </div>
+                    <div class="cell small-8">
+                        <input type="text" placeholder="End Date" id="endDateInput">
+                    </div>
+                    <div class="cell small-4 align-right">
+                        <button class="button" type='button' id="5day">5 Day</button>
+                        <button class="button" type='button' id="30day">30 Day</button>
+                        <button class="button" type='button' id="90day">90 Day</button>
+                        <button class="button" type='button' id="365day">1 Year</button>
+                    </div>
+                </div>
+                <canvas class="cell align-center" id="myChart" width="100" height="50"></canvas>
+            </div>
         </div>
         <!--Container for Watchlist-->
         <div class="container-watchlist">
@@ -40,10 +56,9 @@
         integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
         crossorigin="anonymous"></script>
     <script src="./assets/graph.js"></script>
-    <!-- Compressed JavaScript -->  
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" 
-    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+        integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
 </body>
 
 </html>
