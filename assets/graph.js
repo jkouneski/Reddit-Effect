@@ -13,11 +13,8 @@ fetch(apiUrl)
             var numTemp = objTemp.close;
             var timeTemp = objTemp.time;
             priceArray.push(numTemp);
-            var formatedDate = moment.unix(timeTemp).format("MMMM Do");
-            console.log(formatedDate);
-            labelsArray.push(formatedDate);
+            labelsArray.push(moment.unix(timeTemp).format("MMMM Do"));
         }
-        console.log(labelsArray);
         createChart();
     });
 
@@ -32,10 +29,11 @@ function createChart() {
         data: {
             labels: labelsArray,
             datasets: [{
-                label: 'Price per Day',
+                label: 'BTC price per day',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: priceArray
+                data: priceArray,
+                fill: false
             }]
         },
 
@@ -53,4 +51,3 @@ function createChart() {
         }
     });
 }
-
