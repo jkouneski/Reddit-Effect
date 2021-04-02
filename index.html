@@ -21,23 +21,26 @@
             <input type="text" placeholder="Search">
         </nav>
         <!--Container for Graph-->
-        <div class="grid-container" id="main-container">
-            <div class="grid-x" id="main-item">
-                <div class="row">
-                    <div class="cell">
-                        <input type="text" placeholder="Start Date" id="startDateInput">
-                    </div>
-                    <div class="cell">
-                        <input type="text" placeholder="End Date" id="endDateInput">
-                    </div>
-                    <div class="cell align-center">
-                        <button class="button" type='button' id="5day">5 Day</button>
-                        <button class="button" type='button' id="30day">30 Day</button>
-                        <button class="button" type='button' id="90day">90 Day</button>
-                        <button class="button" type='button' id="365day">1 Year</button>
-                    </div>
+        <div class="grid-container-fluid" id="main-container">
+            <div class="grid-x grid-margin-x align-center" id="search-dates">
+                <div class="small-2 cell">
+                    <input type="text" placeholder="MM/DD/YYYY" id="startDateInput">
                 </div>
-                <canvas class="cell align-center" id="myChart"></canvas>
+                <div class="small-2 cell">
+                    <input type="text" placeholder="MM/DD/YYYY" id="endDateInput">
+                </div>
+                <div class="small-2">
+                    <button class="button" type="button" id="submitBtn">Submit</button>
+                </div>
+                <div class="small-2 cell row">
+                    <button class="button" type='button' id="5day">5 Day</button>
+                    <button class="button" type='button' id="30day">30 Day</button>
+                    <button class="button" type='button' id="90day">90 Day</button>
+                    <button class="button" type='button' id="365day">1 Year</button>
+                </div>
+                <div class="medium-6 cell">
+                    <canvas class="cell align-center" id="myChart"></canvas>
+                </div>
             </div>
         </div>
         <!--Container for Watchlist-->
