@@ -15,7 +15,7 @@ var startText = document.getElementById('startDateInput');
 var endText = document.getElementById('endDateInput');
 var submitBtn = document.getElementById('submitBtn')
 
-//Add onclick functions to each button that changes the number of days and the a function that updates the api url
+//Add onclick functions to each button that changes the number of days
 fiveDayBtn.onclick = function() {
     numDays = 5;
     apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=5&interval=day";
@@ -63,7 +63,6 @@ submitBtn.onclick = function() {
     priceArray = [];
     labelsArray = [];
     getData();
-
 }
 
 //Fetch call the API to get price data
