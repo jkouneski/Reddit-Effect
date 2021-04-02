@@ -46,7 +46,15 @@
         </div>
         <!-- Container for Subreddit-->
         <div class="container-subreddit">
-
+          <a class="post" href="https://www.reddit.com/${currPost.permalink}">
+            <div class="title"> ${currPost.title} </div>
+            <div class="content"> 
+                ${currPost.selftext} 
+                </br></br>
+                <span>${currPost.url}</span>
+            </div>
+            <div class="author"> Posted by ${currPost.author} </div>
+         </a>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
