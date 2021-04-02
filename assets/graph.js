@@ -43,6 +43,7 @@ function updateGraph(){
     redditPostsArray = [];
     priceArray = [];
     labelsArray = [];
+    //if statements that change url depending on how many days are selected
     if(numDays == 5){
         apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=5&interval=day";
     } else if (numDays == 30){
@@ -106,8 +107,6 @@ function createChart() {
             }
         }
     });
-    chart.canvas.parentNode.style.height = '80%';
-    chart.canvas.parentNode.style.width = '80%';  
 }
 
 getData();
