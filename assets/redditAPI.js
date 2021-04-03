@@ -1,31 +1,27 @@
-//linking to subreddit container on HTML
-var container = document.querySelector(".container-subreddit");
+const container = document.querySelector(".container-subreddit");
 
-var renderPosts = (coinType) => {
-   //  Proxy that makes cross origin fetching possible
-   var proxy = "https://cors-anywhere.herokuapp.com/";
-   
-   //Fetching reddit API using  URL on the selected crypto 
 
-   fetch(`${proxy}https://www.reddit.com/r/${coinType}/top.json`)
+//Function to fetch reddit API data
+function renderPosts (){
+
+   fetch(`https://www.reddit.com/r/bitcoin/top.json`)
    .then(function(response) {
-      // Return the response in JSON format
       return response.json();
    })
+   //
    .then(function(response) {
-      // We render our posts to the UI in this block
-      var currPost, markup = ``;
       
-      // The array that contains our posts
-      var postsArr = response.data.children;
+      let currPost, markup = ``;
       
-      // Adding a header based on post type
-      markup = `<h3> Top posts from r/${coinType}</h3>`;
+      // Array with posts                  
+      const postsArr = response.data.children;
       
-      // Iterate through our posts array and chain
-      // the markup based on our HTML structure
-      for (var i = 0; i < postsArr.length; i++) {
-         currPost = postsArr[i].data;   // a single post object
+     
+      markup = `<h3>Top posts from r/bitcoin</h3>`;
+      
+      //Loops through postArr to markdown a HTML element for each reddit post obje                       
+      for (let i = 0; i < postsArr.length; i++) {
+         currPost = postsArr[i].data;  
          markup += `
             <a class="post" href="https://www.reddit.com/${currPost.permalink}">
                <div class="title"> ${currPost.title} </div>
@@ -41,5 +37,6 @@ var renderPosts = (coinType) => {
       // Insert the markup HTML to our container
       container.insertAdjacentHTML('afterbegin',markup);
    })
-  
-}; 
+};
+
+
