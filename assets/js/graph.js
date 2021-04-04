@@ -1,10 +1,11 @@
-var apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=30&interval=day"
+var apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=30&interval=day";
 var priceArray = [];
 var redditPostsArray = [];
 var labelsArray = [];
-var numDays = 5;
-var chart;
-var startDay, endDay;
+var startDay, endDay, chart;
+var numDays = 30;
+var coin = 'BTC';
+
 
 //Store html elements into variables
 var fiveDayBtn = document.getElementById('5day');
@@ -13,43 +14,77 @@ var ninetyDayBtn = document.getElementById('90day');
 var oneYearBtn = document.getElementById('365day');
 var startText = document.getElementById('startDateInput');
 var endText = document.getElementById('endDateInput');
-var submitBtn = document.getElementById('submitBtn')
+var submitBtn = document.getElementById('submitBtn');
+var changeCoinBtn = document.getElementById('change-coin');
+var selectCoin = document.getElementById('coin-selector');
+
+//Add onclick function to the change coin button
+changeCoinBtn.onclick = function() {
+    switch (selectCoin.value) {
+        case 'bitcoin':
+            coin = 'BTC';
+            break;
+        case 'litecoin':
+            coin = 'LTC';
+            break;
+        case 'dogecoin':
+            coin = 'DOGE';
+            break;
+        case 'ethereum':
+            coin = 'ETH';
+            break;
+        default:
+            coin = 'ADA';
+    }
+    apiUrlCrypto = 'https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=' + numDays + '&interval=day&symbol=' + coin;
+    chart.destroy();
+    redditPostsArray = [];
+    priceArray = [];
+    labelsArray = [];
+    localStorage.setItem('coin', coin);
+    localStorage.setItem('days', numDays);
+    getData();
+}
 
 //Add onclick functions to each button that changes the number of days
 fiveDayBtn.onclick = function() {
     numDays = 5;
-    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=5&interval=day";
+    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=5&interval=day&symbol=" + coin;
     chart.destroy();
     redditPostsArray = [];
     priceArray = [];
     labelsArray = [];
+    localStorage.setItem('days', numDays);
     getData();
 }
 thirtyDayBtn.onclick = function() {
     numDays = 30;
-    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=30&interval=day";
+    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=30&interval=day&symbol=" + coin;
     chart.destroy();
     redditPostsArray = [];
     priceArray = [];
     labelsArray = [];
+    localStorage.setItem('days', numDays);
     getData();
 }
 ninetyDayBtn.onclick = function() {
     numDays = 90;
-    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=90&interval=day";
+    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=" + numDays + "&interval=day&symbol=" + coin;
     chart.destroy();
     redditPostsArray = [];
     priceArray = [];
     labelsArray = [];
+    localStorage.setItem('days', numDays);
     getData();
 }
 oneYearBtn.onclick = function() {
     numDays = 365;
-    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&symbol=BTC&data_points=365&interval=day";
+    apiUrlCrypto = "https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=365&interval=day&symbol=" + coin;
     chart.destroy();
     redditPostsArray = [];
     priceArray = [];
     labelsArray = [];
+    localStorage.setItem('days', numDays);
     getData();
 }
 submitBtn.onclick = function() {
@@ -62,11 +97,20 @@ submitBtn.onclick = function() {
     redditPostsArray = [];
     priceArray = [];
     labelsArray = [];
+    localStorage.setItem('days', dataPoints / 1000);
     getData();
 }
 
 //Fetch call the API to get price data
 function getData() {
+    if (localStorage.getItem('days') != null && localStorage.getItem('coin') == null) {
+        numDays = localStorage.getItem('days');
+        apiUrlCrypto = 'https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=' + numDays + '&interval=day&symbol=BTC';
+    } else if (localStorage.getItem('coin') != null) {
+        numDays = localStorage.getItem('days');
+        coin = localStorage.getItem('coin');
+        apiUrlCrypto = 'https://api.lunarcrush.com/v2?data=assets&key=oaaa04joylg6nojvrsywq&data_points=' + numDays + '&interval=day&symbol=' + coin;
+    }
     fetch(apiUrlCrypto)
         .then(function(response) {
             return response.json();
@@ -97,7 +141,7 @@ function createChart() {
             labels: labelsArray,
             datasets: [{
                 yAxisId: 'A',
-                label: 'BTC price per day',
+                label: coin + ' price per day',
                 backgroundColor: 'rgb(255, 5, 200)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: priceArray,
